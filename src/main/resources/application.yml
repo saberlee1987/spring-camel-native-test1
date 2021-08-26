@@ -1,6 +1,23 @@
 server:
   port: 8787
 
+  jetty:
+    threads:
+      max: 4000
+      min: 400
+      max-queue-capacity: 4000
+      acceptors: 400
+      selectors: 8
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
+    session:
+      cookie:
+        http-only: true
+      timeout: 15
+      tracking-modes: cookie
+
 
 spring:
   application:
