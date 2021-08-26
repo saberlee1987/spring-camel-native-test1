@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="BasicInformationQueryService" targetNamespace="http://tempuri.org/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+                  xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex"
+                  xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy"
+                  xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
+                  xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/"
+                  xmlns:wsa10="http://www.w3.org/2005/08/addressing"
+                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                  xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+    <wsp:Policy wsu:Id="SSL_CustomBinding_IBasicInformationQueryService_policy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+                    <wsp:Policy>
+                        <sp:TransportToken>
+                            <wsp:Policy>
+                                <sp:HttpsToken RequireClientCertificate="false"/>
+                            </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                            <wsp:Policy>
+                                <sp:Basic256/>
+                            </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                            <wsp:Policy>
+                                <sp:Strict/>
+                            </wsp:Policy>
+                        </sp:Layout>
+                        <sp:IncludeTimestamp/>
+                    </wsp:Policy>
+                </sp:TransportBinding>
+                <sp:SignedSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+                    <wsp:Policy>
+                        <sp:UsernameToken
+                                sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                            <wsp:Policy>
+                                <sp:WssUsernameToken10/>
+                            </wsp:Policy>
+                        </sp:UsernameToken>
+                    </wsp:Policy>
+                </sp:SignedSupportingTokens>
+                <sp:Wss11 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+                    <wsp:Policy/>
+                </sp:Wss11>
+                <sp:Trust10 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+                    <wsp:Policy>
+                        <sp:MustSupportIssuedTokens/>
+                        <sp:RequireClientEntropy/>
+                        <sp:RequireServerEntropy/>
+                    </wsp:Policy>
+                </sp:Trust10>
+                <wsaw:UsingAddressing/>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsp:Policy wsu:Id="WSHttpBinding_IBasicInformationQueryService_policy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <wsaw:UsingAddressing/>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsdl:types>
+        <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:import namespace="Fida.Models.BasicInformations"/>
+            <xs:element name="GetGenders">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetGendersResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetGendersResult"  
+                                    type="q1:ArrayOfBasicInformation" xmlns:q1="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetMaritalStatuses">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetMaritalStatusesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetMaritalStatusesResult"  
+                                    type="q2:ArrayOfBasicInformation" xmlns:q2="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetCountries">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetCountriesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetCountriesResult"  
+                                    type="q3:ArrayOfBasicInformation" xmlns:q3="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetIdentificationDocumentTypes">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetIdentificationDocumentTypesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetIdentificationDocumentTypesResult"  
+                                    type="q4:ArrayOfBasicInformation" xmlns:q4="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetDegrees">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetDegreesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetDegreesResult"  
+                                    type="q5:ArrayOfBasicInformation" xmlns:q5="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetFields">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetFieldsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetFieldsResult"  
+                                    type="q6:ArrayOfBasicInformation" xmlns:q6="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetLanguages">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetLanguagesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetLanguagesResult"  
+                                    type="q7:ArrayOfBasicInformation" xmlns:q7="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetLanguageSkillLevels">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetLanguageSkillLevelsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetLanguageSkillLevelsResult"  
+                                    type="q8:ArrayOfBasicInformation" xmlns:q8="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetQuestions">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetQuestionsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetQuestionsResult"  
+                                    type="q9:ArrayOfBasicInformation" xmlns:q9="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetResponsesResponses">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetResponsesResponsesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetResponsesResponsesResult"  
+                                    type="q10:ArrayOfBasicInformation" xmlns:q10="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetAddressTypes">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetAddressTypesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetAddressTypesResult"  
+                                    type="q11:ArrayOfBasicInformation" xmlns:q11="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetOrganizationTypes">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetOrganizationTypesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetOrganizationTypesResult"  
+                                    type="q12:ArrayOfBasicInformation" xmlns:q12="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetActivityTypes">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetActivityTypesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetActivityTypesResult"  
+                                    type="q13:ArrayOfBasicInformation" xmlns:q13="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetOwnerTypes">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetOwnerTypesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetOwnerTypesResult"  
+                                    type="q14:ArrayOfBasicInformation" xmlns:q14="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetPoliticalRepresentationTypes">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetPoliticalRepresentationTypesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetPoliticalRepresentationTypesResult"  
+                                    type="q15:ArrayOfBasicInformation" xmlns:q15="Fida.Models.BasicInformations"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified"
+                   targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+            <xs:element name="anyType"   type="xs:anyType"/>
+            <xs:element name="anyURI"   type="xs:anyURI"/>
+            <xs:element name="base64Binary"   type="xs:base64Binary"/>
+            <xs:element name="boolean"   type="xs:boolean"/>
+            <xs:element name="byte"   type="xs:byte"/>
+            <xs:element name="dateTime"   type="xs:dateTime"/>
+            <xs:element name="decimal"   type="xs:decimal"/>
+            <xs:element name="double"   type="xs:double"/>
+            <xs:element name="float"   type="xs:float"/>
+            <xs:element name="int"   type="xs:int"/>
+            <xs:element name="long"   type="xs:long"/>
+            <xs:element name="QName"   type="xs:QName"/>
+            <xs:element name="short"   type="xs:short"/>
+            <xs:element name="string"   type="xs:string"/>
+            <xs:element name="unsignedByte"   type="xs:unsignedByte"/>
+            <xs:element name="unsignedInt"   type="xs:unsignedInt"/>
+            <xs:element name="unsignedLong"   type="xs:unsignedLong"/>
+            <xs:element name="unsignedShort"   type="xs:unsignedShort"/>
+            <xs:element name="char"   type="tns:char"/>
+            <xs:simpleType name="char">
+                <xs:restriction base="xs:int"/>
+            </xs:simpleType>
+            <xs:element name="duration"   type="tns:duration"/>
+            <xs:simpleType name="duration">
+                <xs:restriction base="xs:duration">
+                    <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+                    <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+                    <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:element name="guid"   type="tns:guid"/>
+            <xs:simpleType name="guid">
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:attribute name="FactoryType" type="xs:QName"/>
+            <xs:attribute name="Id" type="xs:ID"/>
+            <xs:attribute name="Ref" type="xs:IDREF"/>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="Fida.Models.BasicInformations"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="Fida.Models.BasicInformations">
+            <xs:complexType name="ArrayOfBasicInformation">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="BasicInformation"  
+                                type="tns:BasicInformation"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ArrayOfBasicInformation"   type="tns:ArrayOfBasicInformation"/>
+            <xs:complexType name="BasicInformation">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Id" type="xs:int"/>
+                    <xs:element minOccurs="0" name="Title"   type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="BasicInformation"   type="tns:BasicInformation"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="IBasicInformationQueryService_GetGenders_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetGenders"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetGenders_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetGendersResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetMaritalStatuses_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetMaritalStatuses"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetMaritalStatuses_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetMaritalStatusesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetCountries_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetCountries"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetCountries_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetCountriesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetIdentificationDocumentTypes_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetIdentificationDocumentTypes"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetIdentificationDocumentTypes_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetIdentificationDocumentTypesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetDegrees_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetDegrees"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetDegrees_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetDegreesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetFields_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetFields"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetFields_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetFieldsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetLanguages_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetLanguages"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetLanguages_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetLanguagesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetLanguageSkillLevels_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetLanguageSkillLevels"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetLanguageSkillLevels_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetLanguageSkillLevelsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetQuestions_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetQuestions"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetQuestions_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetQuestionsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetResponsesResponses_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetResponsesResponses"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetResponsesResponses_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetResponsesResponsesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetAddressTypes_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetAddressTypes"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetAddressTypes_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetAddressTypesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetOrganizationTypes_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetOrganizationTypes"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetOrganizationTypes_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetOrganizationTypesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetActivityTypes_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetActivityTypes"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetActivityTypes_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetActivityTypesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetOwnerTypes_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetOwnerTypes"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetOwnerTypes_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetOwnerTypesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetPoliticalRepresentationTypes_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetPoliticalRepresentationTypes"/>
+    </wsdl:message>
+    <wsdl:message name="IBasicInformationQueryService_GetPoliticalRepresentationTypes_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetPoliticalRepresentationTypesResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="IBasicInformationQueryService">
+        <wsdl:operation name="GetGenders">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetGenders"
+                        message="tns:IBasicInformationQueryService_GetGenders_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetGendersResponse"
+                         message="tns:IBasicInformationQueryService_GetGenders_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetMaritalStatuses">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetMaritalStatuses"
+                        message="tns:IBasicInformationQueryService_GetMaritalStatuses_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetMaritalStatusesResponse"
+                         message="tns:IBasicInformationQueryService_GetMaritalStatuses_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetCountries">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetCountries"
+                        message="tns:IBasicInformationQueryService_GetCountries_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetCountriesResponse"
+                         message="tns:IBasicInformationQueryService_GetCountries_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetIdentificationDocumentTypes">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetIdentificationDocumentTypes"
+                        message="tns:IBasicInformationQueryService_GetIdentificationDocumentTypes_InputMessage"/>
+            <wsdl:output
+                    wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetIdentificationDocumentTypesResponse"
+                    message="tns:IBasicInformationQueryService_GetIdentificationDocumentTypes_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetDegrees">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetDegrees"
+                        message="tns:IBasicInformationQueryService_GetDegrees_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetDegreesResponse"
+                         message="tns:IBasicInformationQueryService_GetDegrees_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetFields">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetFields"
+                        message="tns:IBasicInformationQueryService_GetFields_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetFieldsResponse"
+                         message="tns:IBasicInformationQueryService_GetFields_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetLanguages">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetLanguages"
+                        message="tns:IBasicInformationQueryService_GetLanguages_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetLanguagesResponse"
+                         message="tns:IBasicInformationQueryService_GetLanguages_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetLanguageSkillLevels">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetLanguageSkillLevels"
+                        message="tns:IBasicInformationQueryService_GetLanguageSkillLevels_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetLanguageSkillLevelsResponse"
+                         message="tns:IBasicInformationQueryService_GetLanguageSkillLevels_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetQuestions">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetQuestions"
+                        message="tns:IBasicInformationQueryService_GetQuestions_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetQuestionsResponse"
+                         message="tns:IBasicInformationQueryService_GetQuestions_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetResponsesResponses">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetResponsesResponses"
+                        message="tns:IBasicInformationQueryService_GetResponsesResponses_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetResponsesResponsesResponse"
+                         message="tns:IBasicInformationQueryService_GetResponsesResponses_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetAddressTypes">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetAddressTypes"
+                        message="tns:IBasicInformationQueryService_GetAddressTypes_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetAddressTypesResponse"
+                         message="tns:IBasicInformationQueryService_GetAddressTypes_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetOrganizationTypes">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetOrganizationTypes"
+                        message="tns:IBasicInformationQueryService_GetOrganizationTypes_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetOrganizationTypesResponse"
+                         message="tns:IBasicInformationQueryService_GetOrganizationTypes_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetActivityTypes">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetActivityTypes"
+                        message="tns:IBasicInformationQueryService_GetActivityTypes_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetActivityTypesResponse"
+                         message="tns:IBasicInformationQueryService_GetActivityTypes_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetOwnerTypes">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetOwnerTypes"
+                        message="tns:IBasicInformationQueryService_GetOwnerTypes_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetOwnerTypesResponse"
+                         message="tns:IBasicInformationQueryService_GetOwnerTypes_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetPoliticalRepresentationTypes">
+            <wsdl:input wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetPoliticalRepresentationTypes"
+                        message="tns:IBasicInformationQueryService_GetPoliticalRepresentationTypes_InputMessage"/>
+            <wsdl:output
+                    wsaw:Action="http://tempuri.org/IBasicInformationQueryService/GetPoliticalRepresentationTypesResponse"
+                    message="tns:IBasicInformationQueryService_GetPoliticalRepresentationTypes_OutputMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SSL_CustomBinding_IBasicInformationQueryService" type="tns:IBasicInformationQueryService">
+        <wsp:PolicyReference URI="#SSL_CustomBinding_IBasicInformationQueryService_policy"/>
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetGenders">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetGenders"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetMaritalStatuses">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetMaritalStatuses"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetCountries">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetCountries"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetIdentificationDocumentTypes">
+            <soap12:operation
+                    soapAction="http://tempuri.org/IBasicInformationQueryService/GetIdentificationDocumentTypes"
+                    style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetDegrees">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetDegrees"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetFields">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetFields" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetLanguages">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetLanguages"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetLanguageSkillLevels">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetLanguageSkillLevels"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetQuestions">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetQuestions"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetResponsesResponses">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetResponsesResponses"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetAddressTypes">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetAddressTypes"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetOrganizationTypes">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetOrganizationTypes"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetActivityTypes">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetActivityTypes"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetOwnerTypes">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetOwnerTypes"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPoliticalRepresentationTypes">
+            <soap12:operation
+                    soapAction="http://tempuri.org/IBasicInformationQueryService/GetPoliticalRepresentationTypes"
+                    style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSHttpBinding_IBasicInformationQueryService" type="tns:IBasicInformationQueryService">
+        <wsp:PolicyReference URI="#WSHttpBinding_IBasicInformationQueryService_policy"/>
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetGenders">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetGenders"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetMaritalStatuses">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetMaritalStatuses"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetCountries">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetCountries"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetIdentificationDocumentTypes">
+            <soap12:operation
+                    soapAction="http://tempuri.org/IBasicInformationQueryService/GetIdentificationDocumentTypes"
+                    style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetDegrees">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetDegrees"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetFields">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetFields" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetLanguages">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetLanguages"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetLanguageSkillLevels">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetLanguageSkillLevels"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetQuestions">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetQuestions"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetResponsesResponses">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetResponsesResponses"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetAddressTypes">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetAddressTypes"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetOrganizationTypes">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetOrganizationTypes"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetActivityTypes">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetActivityTypes"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetOwnerTypes">
+            <soap12:operation soapAction="http://tempuri.org/IBasicInformationQueryService/GetOwnerTypes"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPoliticalRepresentationTypes">
+            <soap12:operation
+                    soapAction="http://tempuri.org/IBasicInformationQueryService/GetPoliticalRepresentationTypes"
+                    style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="BasicInformationQueryService">
+        <wsdl:port name="SSL_CustomBinding_IBasicInformationQueryService"
+                   binding="tns:SSL_CustomBinding_IBasicInformationQueryService">
+            <soap12:address location="https://services.fida.ir/BasicInformationQueryService/ws"/>
+            <wsa10:EndpointReference>
+                <wsa10:Address>https://services.fida.ir/BasicInformationQueryService/ws</wsa10:Address>
+            </wsa10:EndpointReference>
+        </wsdl:port>
+        <wsdl:port name="WSHttpBinding_IBasicInformationQueryService"
+                   binding="tns:WSHttpBinding_IBasicInformationQueryService">
+            <soap12:address location="http://fida-soap-svc/BasicInformationQueryService/ws"/>
+            <wsa10:EndpointReference>
+                <wsa10:Address>http://fida-soap-svc/BasicInformationQueryService/ws</wsa10:Address>
+            </wsa10:EndpointReference>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

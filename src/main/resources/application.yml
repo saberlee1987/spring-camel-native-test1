@@ -1,0 +1,81 @@
+server:
+  port: 8787
+
+
+spring:
+  application:
+    name: camel-spring-test
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:camel-pring-test
+    username: sa
+    password: sa
+    hikari:
+      idle-timeout: 7000
+      maximum-pool-size: 80
+      minimum-idle: 30
+      connection-timeout: 10000
+  jpa:
+    database: h2
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+  boot:
+    admin:
+      client:
+         url:  http://localhost:8888/admin
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+        health:
+          show-details: always
+
+
+service:
+  api:
+    basePath: /services/fida
+  fida:
+    basicInformationUrl: https://services.fida.ir/BasicInformationQueryService/ws
+    foreignPartyQueryUrl: https://services.fida.ir/ForeignPartyQueryService/ws
+    foreignPartyRequestCommandUrl: https://services.fida.ir/ForeignPartyRequestCommandService/ws
+    foreignPartyRequestQueryUrl: https://services.fida.ir/ForeignPartyRequestQueryService/ws
+    username: "tejaratbank"
+    password: "321789"
+    connectionTimeout: 30000
+    disableHostnameCheck: true
+    keystorePassword: 321789
+    keystoreLocation: fida.jks
+
+
+
+
+camel:
+  springboot:
+    main-run-controller: true
+    tracing: true
+    producer-template-cache-size: 5000
+    exchange-factory-capacity: 1000
+    endpoint-lazy-start-producer: true
+    consumer-template-cache-size: 5000
+    backlog-tracing: true
+    dump-routes: true
+    log-mask: true
+  servlet:
+    mapping:
+      context-path: ${service.api.base-path}/*
+
+  component:
+    cxf:
+      lazy-start-producer: true
+    cxfrs:
+      lazy-start-producer: true

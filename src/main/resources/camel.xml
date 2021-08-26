@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configures the Camel Context -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:http="http://cxf.apache.org/transports/http/configuration"
+       xmlns:sec="http://cxf.apache.org/configuration/security"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:core="http://cxf.apache.org/core"
+       xmlns:soap="http://www.springframework.org/schema/c"
+       xmlns:wsse="http://www.springframework.org/schema/p" xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
+       http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+       http://cxf.apache.org/configuration/security http://cxf.apache.org/schemas/configuration/security.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+    <!-- ======================================== CXF SOAP client endpoint ======================================== -->
+    <!-- Timeout configuration for CXF endpoint -->
+    <!-- Timeout value is hardcoded (to 1 minute) due to a bug in Spring or Cxf - the schema validation is done before -->
+    <!-- replacing the property's value -->
+
+    <http:conduit name="*.http-conduit">
+        <http:tlsClientParameters disableCNCheck="${service.fida.disableHostnameCheck}">
+            <sec:keyManagers keyPassword="${service.fida.keystorePassword}">
+                <sec:keyStore type="JKS" password="${service.fida.keystorePassword}"
+                              resource="${service.fida.keystoreLocation}" />
+
+            </sec:keyManagers>
+            <sec:trustManagers>
+                <sec:keyStore type="JKS" password="${service.fida.keystorePassword}"
+                              resource="${service.fida.keystoreLocation}" />
+
+            </sec:trustManagers>
+
+            <sec:cipherSuitesFilter>
+                <!--&lt;!&ndash; these filters ensure that a ciphersuite with export-suitable or-->
+                    <!--null encryption is used, but exclude anonymous Diffie-Hellman key change-->
+                    <!--as this is vulnerable to man-in-the-middle attacks &ndash;&gt;-->
+
+                <sec:include>.*_EXPORT_.*</sec:include>
+                <sec:include>.*_EXPORT1024_.*</sec:include>
+                <sec:include>.*_WITH_DES_.*</sec:include>
+                <sec:include>.*_WITH_AES_.*</sec:include>
+                <sec:include>.*_WITH_NULL_.*</sec:include>
+                <sec:exclude>.*_DH_anon_.*</sec:exclude>
+            </sec:cipherSuitesFilter>
+        </http:tlsClientParameters>
+
+        <http:client AutoRedirect="true" Connection="Keep-Alive"
+                     ReceiveTimeout="${service.fida.connectionTimeout}" ConnectionTimeout="${service.fida.connectionTimeout}"  />
+    </http:conduit>
+
+    <bean id="wss4JOutInterceptor" class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
+        <constructor-arg>
+            <map>
+                <entry key="action" value="UsernameToken"/>
+                <entry key="user" value="${service.fida.username}"/>
+                <entry key="passwordType" value="PasswordText"/>
+                <entry key="passwordCallbackClass" value="com.saber.spring.camel.test1.callback.PasswordCallback"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <cxf:cxfEndpoint id="Basicinformationqueryservice" address="${service.fida.basicInformationUrl}"
+                     serviceClass="com.saber.spring.camel.test1.dto.wsdl.basicinformation.IBasicInformationQueryService"
+                     wsdlURL="wsdl/BasicInformationQueryService.wsdl">
+
+        <cxf:outInterceptors>
+          <ref bean="wss4JOutInterceptor"/>
+        </cxf:outInterceptors>
+
+    </cxf:cxfEndpoint>
+
+
+</beans>
